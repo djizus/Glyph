@@ -471,8 +471,18 @@
     }
 
     function createGlyphImage(glyph, glyphSize, style)
-    {
-        var glyphCenter = glyphSize/2;
+    {		
+			var gm9igt = gm9.IngressGlyphTools;
+			var glyphPad = createInputPad({
+			size: 110,
+			style: {
+			  color: "white"
+			}
+		  });
+		  glyphPad.setGlyph((gm9igt.glyphtionaryIndex[glyph.toLowerCase()] || [null])[0])
+		return glyphPad;
+					  
+/*         var glyphCenter = glyphSize/2;
         var glyphRadius = glyphSize*48/100;
 
         if(style===undefined){style = {};}
@@ -484,7 +494,8 @@
         var ctx = canvas.getContext("2d");
 
         ///@todo drawGrid
-
+		drawGrid(ctx, glyphCenter, glyphCenter, glyphRadius, glyph);
+		
         limitContext(
             ctx,
             style.brushGlyph || function(targetCtx) {
@@ -497,7 +508,7 @@
                 drawGlyph(ctx, glyphCenter, glyphCenter, glyphRadius, glyph);
             });
 
-        return canvas;
+        return canvas; */
     }
 
     //

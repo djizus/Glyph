@@ -1,14 +1,48 @@
-html {
-    margin:0;
-    background: black;
-    color: white;
+@font-face {
+  font-family: 'Coda';
+  font-style: normal;
+  font-weight: 200;
+  src: local('Coda'), local('Coda-Regular'), url(http://fonts.gstatic.com/s/coda/v10/_xmjOXyFZCVnKmbBxb_PUA.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 }
-body {
-    margin:0;
-}
-a {
-    color: #5050ff;
-	font-size: 200%;
+
+header {
 	text-align: center;
-	margin: 0 -10%;
+}
+
+html {
+    margin: 0;
+	background-image: url("bg.jpg");
+    background-size: 100%;
+    color: white;
+	font-family: 'Coda';
+}
+
+body {
+    margin: 2% 5%;
+}
+
+.list-page{
+	width: 100%;
+	font-size: 8px;
+}
+
+a {
+    color: white;
+	font-size: 400%;
+	margin: 0 30%;
+}
+
+#divMain{
+	margin-top: 2%;
+    width: 35%;
+    float: left;    
+	margin-right: 5%;
+}
+
+.DivLVs{
+    width: 55%;
+	margin-top: 2.1%;
+    float: left;  
+	margin-left: 1%;
 }

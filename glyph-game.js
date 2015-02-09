@@ -9,9 +9,6 @@
 // - glyph-dic.js
 // - glyph-sequence-dic.js
 
-
-		  
-		  
 function findSequence(){	
 	var seqDiv;
 	var gm9igt = gm9.IngressGlyphTools;
@@ -28,12 +25,16 @@ function findSequence(){
 		seqDiv = document.getElementById("seqDiv");
 	}
 	seqDiv.innerHTML = "";
+	seqDiv.style.display='block';
+	seqDiv.style.width='55%';
+	seqDiv.style.marginTop='2.1%';
+	seqDiv.style.float='left';
 	var divDisplay = document.getElementById("DivLV"+strUser);
 	divDisplay.style.display='none';
 	var seqs = gm9igt.sequenceDic.getSequences(strUser);			
 	// Level Sequences Table
 	var seqsTable = document.createElement("table");
-	seqsTable.setAttribute("border", "1");
+	//seqsTable.setAttribute("border", "1");
 				
 	var wGlyph = glyphWord.value;
 	if (wGlyph == "")
@@ -42,7 +43,7 @@ function findSequence(){
 		return;
 	}
 	
-	var ans = "<h2> Glyphs for "+ strUser +" and the "+ wGlyph + " glyph</h2>";
+	var ans = "<h2> Glyph sequences for portal lvl"+ strUser +" and the "+ wGlyph + " glyph:</h2>";
 	seqDiv.innerHTML = seqDiv.innerHTML + ans;
 	seqDiv.innerHTML = seqDiv.innerHTML;	
 	seqDiv.appendChild(seqsTable);
@@ -69,11 +70,11 @@ function findSequence(){
 					  glyphDiv.style.display = "inline-block";
 					  glyphDiv.style.textAlign = "center";
 					  if(glyph){
-						  glyphDiv.appendChild(gm9igt.createGlyphImage(
-							  glyph,
-							  60,
-							  {color: "white", glyphLineWidth: 2}));
-					  }
+                          glyphDiv.appendChild(gm9igt.createGlyphImage(
+                              word.toLowerCase(),
+                              100,
+                              {color: "white", glyphLineWidth: 2}));
+                      }
 					  var wordDiv = document.createElement("div");
 					  wordDiv.style.padding = "0 0.5em";
 					  wordDiv.appendChild(document.createTextNode(word.toUpperCase()));
@@ -90,8 +91,11 @@ function displayLvl() {
 	var e = document.getElementById("sel1");
 	var strUser = e.options[e.selectedIndex].text;
 	var glyphWord = document.getElementById("glyph-word");
-	//seqDiv = document.getElementById("seqDiv");
-	//seqDiv.style.display='none';
+	if(document.getElementById("seqDiv"))
+	{
+		seqDiv = document.getElementById("seqDiv");
+		seqDiv.style.display='none';
+	}
 	if (strUser == "LV0"){
 		return;
 		}
