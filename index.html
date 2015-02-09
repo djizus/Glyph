@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="black.css" />
+    <script type="text/javascript" src="glyph-tools.js" charset="utf-8"></script>
+    <script type="text/javascript" src="glyph-dic.js" charset="utf-8"></script>
+    <script type="text/javascript" src="glyph-sequence-dic.js" charset="utf-8"></script>
+    <script type="text/javascript" src="glyph-game.js" charset="utf-8"></script>
+    <title>Glyph Helper - Sequence Finder </title>
+    <a href="#">Glyph Helper</a>
+  </head>
+  <body>
+    <div id="list-page">
+      <script>
+      //<![CDATA[
+
+	  (	
+		function(){
+          var gm9igt = gm9.IngressGlyphTools;
+          var page = document.getElementById("list-page");
+          var lv;
+          var naviDiv = document.createElement("div");
+		  naviDiv.setAttribute("id", "divMain");
+          page.appendChild(naviDiv);
+		  
+		  var q = "<h2> Enter the portal level and/or the first glyph of the sequence:</h2>";
+		  naviDiv.innerHTML = naviDiv.innerHTML + q;
+		  var newDiv = document.createElement('div');
+		  newDiv.style.margin = "0 0 2% 0";
+			var selectHTML = "";
+			selectHTML="<br/>Portal lvl : <select id='sel1' onchange='displayLvl()'>";
+			for(lv = 3; lv <= 8; ++lv){
+				selectHTML+= "<option value='"+lv+"'>LV"+lv+"</option>";
+			}
+			selectHTML += "</select>";
+			newDiv.innerHTML = selectHTML;
+			naviDiv.appendChild(newDiv);
+			
+			var glyphPad = gm9igt.createInputPad({
+			size: 300,
+			style: {
+			  color: "white"
+			}
+		  });
+		  
+		  var pad = document.createElement('div');
+		  pad.setAttribute("id", "glyph-pad");	  
+		  pad.appendChild(glyphPad);
+		  naviDiv.appendChild(pad);
+		  glyphPad.addEventListener("glyphchange", function(e){
+			var glyph = glyphPad.getGlyph();
+			glyphWord.value = gm9igt.glyphtionary.get(glyph);
+			if (glyphWord.value != "")
+				findSequence();
+		  }, false);
+		  
+		  var c = document.createElement('div');
+		  c.setAttribute("id", "control");
+		  c.innerHTML = "<br/>Glyph name:   <input type='text' id='glyph-word' />         ";
+			
+		var bWord = document.createElement("input");
+		  bWord.type = "button";
+		  bWord.value = "Set a glyph and find sequences";
+		  bWord.addEventListener("click", function(e){
+			  setGlyphFromWord(glyphWord.value);
+		  }, false);
+		 c.appendChild(bWord);
+		 
+		 var bClear = document.createElement("input");
+		  bClear.type = "button";
+		  bClear.value = "Clear Pad";
+		  bClear.addEventListener("click", function(e){
+			  glyphPad.clearGlyph();
+		  }, false);
+		 c.appendChild(bClear);
+		 
+		 //var bFinder = document.createElement("input");
+		 // bFinder.type = "button";
+		  //bFinder.value = "Find Sequence";
+		  //bFinder.addEventListener("click", function(e){
+		//	  findSequence();
+		 // }, false);
+		 //c.appendChild(bFinder);
+		 
+		  naviDiv.appendChild(c);
+		
+		var glyphWord = document.getElementById("glyph-word");
+			
+		document.getElementById('glyph-word').onkeypress = function(e) {
+			var event = e || window.event;
+			var charCode = event.which || event.keyCode;
+			if ( charCode == '13' ) {
+			  setGlyphFromWord(glyphWord.value);
+			  return false;
+			}
+	}
+		  function setGlyphFromWord(word){
+			  glyphPad.setGlyph((gm9igt.glyphtionaryIndex[word.toLowerCase()] || [null])[0]);
+			  findSequence();
+		  }
+	  
+	  //----------------------------------------------------------------//
+		  
+          for(lv = 0; lv <= 8; ++lv){		
+		  var divs = document.createElement('div');
+		  divs.setAttribute("id", "DivLV"+lv);
+		  divs.setAttribute("class", "DivLVs");
+		  divs.style.display='none';
+		  var ans = "<h2> All sequences </h2>";
+		  divs.innerHTML = divs.innerHTML + ans;	
+              // Level Header
+              var levelHeader = document.createElement("h2");
+              levelHeader.id = "level" + lv;
+              levelHeader.appendChild(document.createTextNode("Level" + lv));
+			  divs.innerHTML = divs.innerHTML + levelHeader.innerHTML;
+
+              // Level Sequences Table
+              var seqs = gm9igt.sequenceDic.getSequences(lv);
+              var seqsTable = document.createElement("table");
+              //seqsTable.setAttribute("border", "1");
+			  divs.innerHTML = divs.innerHTML;	
+				divs.appendChild(seqsTable);			  
+			  page.appendChild(divs);
+              for(var si = 0; si < seqs.length; ++si){
+                  var seqWords = seqs[si];
+                  var seqTr = document.createElement("tr");
+                  seqsTable.appendChild(seqTr);
+
+                  // Sequence Glyphs
+                  var seqTd = document.createElement("td");
+                  seqTr.appendChild(seqTd);
+                  for(var gi = 0; gi < seqWords.length; ++gi){
+                      var word = seqWords[gi]; //NOTE: Uppercase or Lowercase
+                      var glyphs = gm9igt.glyphtionaryIndex[word.toLowerCase()];
+                      var glyph = glyphs && glyphs.length > 0 ? glyphs[0] : null;
+                      var glyphDiv = document.createElement("div");
+                      glyphDiv.style.display = "inline-block";
+                      glyphDiv.style.textAlign = "center";
+                      if(glyph){
+                          glyphDiv.appendChild(gm9igt.createGlyphImage(
+                              word.toLowerCase(),
+                              50,
+                              {color: "white", glyphLineWidth: 2}));
+                      }
+                      var wordDiv = document.createElement("div");
+                      wordDiv.style.padding = "0 0.5em";
+                      wordDiv.appendChild(document.createTextNode(word.toUpperCase()));
+                      glyphDiv.appendChild(wordDiv);
+                      seqTd.appendChild(glyphDiv);
+                  }
+              }
+          }
+
+      })();
+      //]]>
+      </script>
+    </div>
+  </body>
+</html>
