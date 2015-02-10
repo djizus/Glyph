@@ -3,15 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+	<!-- CSS -->
     <link rel="stylesheet" href="black.css" />
+	<!-- JS libs -->
     <script type="text/javascript" src="glyph-tools.js" charset="utf-8"></script>
     <script type="text/javascript" src="glyph-dic.js" charset="utf-8"></script>
     <script type="text/javascript" src="glyph-sequence-dic.js" charset="utf-8"></script>
     <script type="text/javascript" src="glyph-game.js" charset="utf-8"></script>
     <title>Glyph Helper - Sequence Finder </title>
-    <a href="#">Glyph Helper</a>
   </head>
   <body>
+    <h1>Glyph Helper</h1>
     <div id="list-page">
       <script>
       //<![CDATA[
@@ -30,8 +32,8 @@
 		  var newDiv = document.createElement('div');
 		  newDiv.style.margin = "0 0 2% 0";
 			var selectHTML = "";
-			selectHTML="<br/>Portal lvl : <select id='sel1' onchange='displayLvl()'>";
-			for(lv = 3; lv <= 8; ++lv){
+			selectHTML="<br/>Portal lvl : <select id='sel1' onchange='displayLvl()'><option value='--'>--</option>";
+			for(lv = 4; lv <= 8; ++lv){
 				selectHTML+= "<option value='"+lv+"'>LV"+lv+"</option>";
 			}
 			selectHTML += "</select>";
@@ -73,6 +75,7 @@
 		  bClear.value = "Clear Pad";
 		  bClear.addEventListener("click", function(e){
 			  glyphPad.clearGlyph();
+			  displayLvl();
 		  }, false);
 		 c.appendChild(bClear);
 		 
@@ -100,7 +103,6 @@
 			  glyphPad.setGlyph((gm9igt.glyphtionaryIndex[word.toLowerCase()] || [null])[0]);
 			  findSequence();
 		  }
-	  
 	  //----------------------------------------------------------------//
 		  
           for(lv = 0; lv <= 8; ++lv){		
@@ -156,6 +158,10 @@
       })();
       //]]>
       </script>
+	  <div id="footer">
+			<p> Found a sequence not listed ? Help us by submitting it <a href="https://github.com/djizus/Glyph">here</a></p>
+	</div>
+		
     </div>
   </body>
 </html>

@@ -1,9 +1,8 @@
 @font-face {
-  font-family: 'Coda';
+  font-family: "Coda";
   font-style: normal;
-  font-weight: 200;
-  src: local('Coda'), local('Coda-Regular'), url(http://fonts.gstatic.com/s/coda/v10/_xmjOXyFZCVnKmbBxb_PUA.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+  font-weight: 400;
+  src: local("Coda"), local("Coda-Regular"), url("http://fonts.gstatic.com/s/coda/v10/_xmjOXyFZCVnKmbBxb_PUA.woff2") format("woff2"), url("http://fonts.gstatic.com/s/coda/v10/A7A0IS2-4Ga-ZdxhMlAPjg.woff") format("woff");
 }
 
 header {
@@ -18,31 +17,45 @@ html {
 	font-family: 'Coda';
 }
 
-body {
-    margin: 2% 5%;
-}
-
 .list-page{
 	width: 100%;
 	font-size: 8px;
 }
 
-a {
+h1 {
     color: white;
 	font-size: 400%;
-	margin: 0 30%;
+	margin-left: 33%;
+    text-decoration: underline;
 }
 
 #divMain{
-	margin-top: 2%;
-    width: 35%;
+	margin-left: 8%;
+    width: 25%;
     float: left;    
-	margin-right: 5%;
+	margin-right: 12%;
 }
+
+#control{
+	margin-bottom: 20%;
+	}
 
 .DivLVs{
     width: 55%;
-	margin-top: 2.1%;
-    float: left;  
-	margin-left: 1%;
+	height: 42em;
+    float: left;
+	margin-bottom: 5%;
+	overflow:auto;
+    overflow-y: scroll;
+}
+
+#footer {
+	text-align: center;
+	float:left;
+	position: fixed; 
+	bottom: 0;
+	width:100%;
+	background: #000;
+	color: #FFF;
+	font-size: 70%;
 }

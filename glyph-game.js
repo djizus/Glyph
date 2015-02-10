@@ -27,7 +27,8 @@ function findSequence(){
 	seqDiv.innerHTML = "";
 	seqDiv.style.display='block';
 	seqDiv.style.width='55%';
-	seqDiv.style.marginTop='2.1%';
+	//seqDiv.style.marginTop='2.1%';
+	seqDiv.style.marginBottom='5%';
 	seqDiv.style.float='left';
 	var divDisplay = document.getElementById("DivLV"+strUser);
 	divDisplay.style.display='none';

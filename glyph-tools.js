@@ -403,13 +403,28 @@
                 ctx.stroke();
             };
         }
-        for(var ni = 0; ni < NODE_POS.length; ++ni){
-            funDraw(
-                ctx,
-                getNodePosX(glyphCenterX, glyphRadius, ni),
-                getNodePosY(glyphCenterY, glyphRadius, ni),
-                nodeRadius);
-        }
+		if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1)
+		{
+			setTimeout(function(){
+				for(var ni = 0; ni < NODE_POS.length; ++ni){
+				funDraw(
+					ctx,
+					getNodePosX(glyphCenterX, glyphRadius, ni),
+					getNodePosY(glyphCenterY, glyphRadius, ni),
+					nodeRadius);
+				}
+			},0);
+		}
+		else
+		{
+			for(var ni = 0; ni < NODE_POS.length; ++ni){
+				funDraw(
+					ctx,
+					getNodePosX(glyphCenterX, glyphRadius, ni),
+					getNodePosY(glyphCenterY, glyphRadius, ni),
+					nodeRadius);
+			}
+		}
     }
 
     function drawEdge(ctx, glyphCenterX, glyphCenterY, glyphRadius, edge)
